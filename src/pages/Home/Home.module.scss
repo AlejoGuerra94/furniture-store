@@ -1,0 +1,38 @@
+$img-hero: url("../../assets/principal.jpg");
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    gap: 1rem;
+}
+
+.header{
+    display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+
+.sections{
+    display: flex;
+    flex-direction: column;
+   gap: 4rem;
+}
+
+.borderNav{
+    border-top: 1px solid #e1e1e1;
+    padding-top: 1rem;
+}
+
+.hero{
+    background-image: $img-hero;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center;
+    height: 50rem;   
+}
+
+

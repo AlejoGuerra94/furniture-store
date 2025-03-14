@@ -1,0 +1,11 @@
+export { default as Categoria1 } from './categoria1.jpg';
+export { default as Categoria2 } from './categoria2.jpg';
+export { default as Categoria3 } from './categoria3.jpg';
+export { default as producto1 } from './producto1.jpg';
+export { default as producto2 } from './producto2.jpg';
+export { default as producto3 } from './producto3.jpg';
+export { default as producto4 } from './producto4.jpg';
+export { default as producto5 } from './producto5.jpg';
+export { default as producto6 } from './producto6.jpg';
+export { default as nosotros } from './nosotros.jpg';
+export { default as principal } from './principal.jpg';

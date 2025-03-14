@@ -1,12 +1,18 @@
-import { menuItems } from "./constans";
-import MenuItem from "./MenuItem";
+import MenuItem, { ILink } from "./MenuItem";
 
-export const Menu = () => {
+import styles from './Menu.module.scss'
+
+interface IMenu {
+  items: ILink[];
+  className?: string;
+}
+
+export const Menu = ({items,className}:IMenu) => {
   return (
-    <div>
-      {menuItems.map((item) => (
+    <nav className={`${styles.container} ${className}`}>
+      {items.map((item) => (
         <MenuItem key={item.href} {...item} />
       ))}
-    </div>
+    </nav>
   );
 };
