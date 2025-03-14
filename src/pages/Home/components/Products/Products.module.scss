@@ -12,7 +12,7 @@ $blueColor: #037bc0;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 1rem;
-  width: 118.8rem;
+  width: 120rem;
 }
 .cardProduct:nth-child(1) {
   grid-column: 1/7;

@@ -21,7 +21,7 @@ export const Home = () => {
       <Category />
       <AboutUS />
       <Products/>
-      <Footer section={footerSections} />
+      <Footer section={footerSections} description={'Todos los derechos Reservados. TiedaMuebles'} />
       </main>
     </div>
   );

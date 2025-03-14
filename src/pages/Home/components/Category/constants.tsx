@@ -1,4 +1,4 @@
-import { ICard } from "../../../../components/Card/Card";
+import { ICard } from "../../../../components/Card";
 import { Categoria1, Categoria2, Categoria3 } from "../../../../assets";
 
 import styles from './Category.module.scss'

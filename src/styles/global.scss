@@ -19,8 +19,8 @@ body {
 }
 
 h1,
-h2,h3{
-  margin: 0 0 5rem 0;
+h2{
+  margin: 0 0 2rem 0;
 }
 
 h1 {
@@ -33,6 +33,12 @@ h2 {
 
 h3{
   font-size: 3rem;
+  margin: 0;
+}
+
+a {
+  color: $blackColor;
+  text-decoration: none;
 }
 
 .blue {

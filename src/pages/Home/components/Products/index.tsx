@@ -1,4 +1,4 @@
-import Card from "../../../../components/Card/Card";
+import { Card } from "../../../../components";
 import { products } from "./constanst";
 import styles from "./Products.module.scss";
 

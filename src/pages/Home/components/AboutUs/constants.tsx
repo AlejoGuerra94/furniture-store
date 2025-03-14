@@ -1,4 +1,4 @@
-import { ICard } from "../../../../components/Card/Card";
+import { ICard } from "../../../../components/Card";
 import { nosotros } from "../../../../assets";
 
 import styles from './AboutUs.module.scss'

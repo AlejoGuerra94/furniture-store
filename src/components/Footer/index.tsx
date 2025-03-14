@@ -18,23 +18,23 @@ interface IFooter {
   className?: string;
 }
 
- const Footer = ({ section, description, className }: IFooter) => {
+const Footer = ({ section, description, className }: IFooter) => {
   return (
     <footer className={styles.container}>
-      {section.map((section, index) => (
-        <div key={index} className={`${styles.section} ${className}`}>
-          <h3>{section.title}</h3>
-          <nav className={`${styles.nav}`}>
-            <ul className={styles.list}>
+      <div className={styles.content}>
+        {section.map((section, index) => (
+          <div key={index} className={`${styles.section} ${className}`}>
+            <h3>{section.title}</h3>
+            <nav className={`${styles.nav}`}>
               {section.links?.map((link, linkIndex) => (
-                <li key={linkIndex}>
-                  <a href={link.link}>{link.title}</a>
-                </li>
+                <a key={linkIndex} href={link.link}>
+                  {link.title}
+                </a>
               ))}
-            </ul>
-          </nav>
-        </div>
-      ))}
+            </nav>
+          </div>
+        ))}
+      </div>
       <p>{description}</p>
     </footer>
   );
