@@ -1,11 +1,10 @@
 import { ILink } from "./MenuItem";
 
 export const menuItems: ILink[] = [
-  { children: "Home", href: "/Home" },
-  { children: "Vegetarianos", href: "/vegetarianos" },
-  { children: "Platos Principales", href: "/platosPrincipales" },
-  { children: "Tortas", href: "/tortas" },
-  { children: "Comida Rápida", href: "/comidaRapida" },
-  { children: "Menú Niños", href: "/menuNiño" },
-  { children: "Sopas", href: "/sopas" },
+  { children: "Home", href: "/" },
+  { children: "Nosotros", href: "/nosotros" },
+  { children: "Tienda", href: "/tienda" },
+  { children: "Blog", href: "/blog" },
+  { children: "Galeria", href: "/galeria" },
+  { children: "Contacto", href: "/contacto" },
 ];

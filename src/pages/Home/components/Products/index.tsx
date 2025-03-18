@@ -5,7 +5,7 @@ import styles from "./Products.module.scss";
 const Products = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.titleProduct}>Nuestro Productos</h2>
+      <h2 className={styles.titleProduct}>Nuestros Productos</h2>
       <div className={`${styles.productsContainer}`}>
         {products.map((product, index) => (
           <Card

@@ -3,13 +3,12 @@ $blueColor: #037bc0;
 
 
 html {
-  box-sizing: border-box;
   font-size: 62.5%; /* 1rem = 10px */
 }
 *,
-*:before,
-*:after {
-  box-sizing: inherit;
+*::before,
+*::after {
+  box-sizing: border-box; /* Aplica border-box a todos los elementos */
 }
 
 body {
@@ -43,6 +42,13 @@ a {
 
 .blue {
   color: $blueColor;
+}
+
+.app{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
 
 .backgroundBlue{

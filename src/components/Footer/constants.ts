@@ -1,15 +1,4 @@
-import { ILink } from "../../components/NavBar/MenuItem";
-import { IFooterSection } from "../../components/Footer";
-
-
-export const menuItems: ILink[] = [
-  { children: "Home", href: "/Home" },
-  { children: "Nosotros", href: "/vegetarianos" },
-  { children: "Tienda", href: "/platosPrincipales" },
-  { children: "Blog", href: "/tortas" },
-  { children: "Galeria", href: "/comidaRapida" },
-  { children: "Contacto", href: "/menuNiño" },
-];
+import { IFooterSection } from ".";
 
 export const footerSections : IFooterSection[]= [
 {
