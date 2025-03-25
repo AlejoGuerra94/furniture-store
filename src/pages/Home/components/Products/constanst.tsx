@@ -4,7 +4,7 @@ import { Button } from "../../../../components";
 
 import styles from "./Products.module.scss";
 
-const buttonCardAdd = <Button children="Agregar al carrito" />;
+const buttonCardAdd = <Button children="Agregar al carrito" variant="secondary" />;
 
 export const products: ICard[] = [
   {

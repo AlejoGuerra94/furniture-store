@@ -1,0 +1,186 @@
+$blue: #037bc0;
+$blue-secundary: #49a0d2;
+$gray-disabled: #c4c4c4;
+$red:#f4364c;
+$input-bg: #F3F7FC;
+$input-bg-disable: #F6F6F6;
+$input-bg-error: #FFF5F5;
+$input-bg-focus: #DFE9FF;
+$white: #FFF;
+$gray-text-disabled: #D9D9D9;
+$input-text-empty: #CCCCCC;
+$input-text-error: #F4364C;
+$input-text-focus: #0D409F;
+
+$mobile-height: 4rem;
+$desktop-height: 3.5rem;
+
+.wrapper {
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  height: calc($mobile-height + 1.5rem);
+  width: 100%;
+  
+  .container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+
+    .input {
+      background-color: $input-bg;
+      border: none;
+      border-radius: 0.714rem;
+      color: $input-text-empty;
+      font-size: 1.143rem;
+      height: $mobile-height;
+      outline: 0;
+      padding: 0 1rem;
+      width: 100%;
+
+
+      &__paddingRight {
+        padding-right: 3.5rem;
+
+      }
+
+      &::placeholder {
+        color: $input-text-empty;
+        opacity: 1;
+  
+      }
+
+      &:-ms-input-placeholder {
+      
+        color: $input-text-empty;
+      }
+
+      &::-ms-input-placeholder {
+        color: $input-text-empty;
+      }
+
+      &:focus + div {
+        color: $input-text-focus;
+      }
+
+      &:focus {
+        color: $input-text-focus;
+        background-color: $input-bg-focus;
+
+        &::placeholder {
+          color: $input-text-focus;
+        }
+      }
+
+      &:read-only + div,
+      &:read-only {
+        cursor: initial;
+        pointer-events: none;
+      }
+
+      &:read-only {
+        background-color: $input-bg-disable;
+
+        &::placeholder {
+          color: $gray-text-disabled;
+        }
+      }
+
+      &__error + div {
+        color: $input-text-error !important;
+      }
+
+      &__error {
+        background-color: $input-bg-error !important;
+        color: $input-text-error !important;
+
+        &::placeholder {
+          color: $input-text-error !important;
+        }
+      }
+
+      &__complete + div {
+        color: $input-text-focus !important;
+      }
+
+      &__complete {
+        background-color: $input-bg !important;
+        color: $input-text-focus !important;
+
+        &::placeholder {
+          color: $input-text-focus !important;
+        }
+      }
+
+      &.cms {
+        height: 2.28rem;
+        background: none;
+        border: 1px solid $blue;
+        color: black;
+
+        &:hover {
+          color: $blue-secundary;
+        }
+
+        &:focus,
+        &:focus + div {
+          color: $blue-secundary;
+          &::placeholder {
+            color: $gray-disabled;
+          }
+        }
+
+        &:read-only,
+        &:read-only + div {
+          cursor: initial;
+          pointer-events: none;
+          border: 1px solid $gray-disabled;
+
+          &::placeholder {
+            color: $gray-disabled;
+          }
+        }
+
+        &__complete,
+        &__complete + div {
+          color: black !important;
+
+          &::placeholder {
+            color: $gray-disabled !important;
+          }
+        }
+      }
+      &__error.cms,
+      &__error.cms + div {
+        background: none !important;
+        color: $red !important;
+        border: 1px solid $red;
+
+        &::placeholder {
+          color: $red !important;
+        }
+      }
+    }
+  }
+
+  input + div {
+    background-color: transparent;
+    color: $input-text-empty;
+  }
+
+  input + div.cms {
+    background: none;
+  }
+
+  .error {
+    color: $red;
+    font-size: 1rem;
+    line-height: 1.714rem;
+    margin-left: 1rem;
+    transition: all 1s ease-in-out;
+  }
+}

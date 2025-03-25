@@ -1,27 +1,42 @@
-$greenColor: #8cbc00;
-$greenColorHover: #769c02;
+$primary-green: #8cbc00;
+$greenHover: #769c02;
+$primary-blue:#037bc0;
+$blueHover:#51A4B7;
 
 $md: 48rem;
 
 
 .button{
-    background-color: $greenColor;
     display: block;
     color: #fff;
     text-transform: uppercase;
     font-weight: 900;
     padding: 1rem;
-    border: none;
     transform: background-color 0.3s ease-out;
     cursor: pointer;
+    border: none;
+    width: 100%;
 
   @media screen and (min-width: $md) {
     font-size: 1rem;
     line-height: 1.5rem;
     padding: 1rem;
   }
-}
 
-.button:hover{
-    background-color: $greenColorHover;
+  &.primary{
+    background-color: $primary-blue;
+    border-radius: 7rem;
+
+    &:hover{
+      background-color: $blueHover;
+    }
+  }
+
+  &.secondary{
+    background-color: $primary-green;
+
+    &:hover{
+      background-color: $greenHover;
+    }
+  }
 }

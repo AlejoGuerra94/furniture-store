@@ -1,29 +1,26 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// App.tsx
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AuthProvaider } from "./auth/AuthProvaider";
+import Layout from "./components/Layout";
+import ProtectectRout from "./routes/ProtectedRoute";
+import Login from "./pages/Login";
 import Home from "./pages/Home";
-import { Menu } from "./components/NavBar/Menu";
-import AboutUs from "./pages/AboutUs";
-import Header from "./components/Header";
-import { Footer } from "./components";
-import { footerSections } from "./components/Footer/constants";
 
 function App() {
   return (
-    <Router>
-      <div className="app">
+    <AuthProvaider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
 
-      <Header />
-      <Menu />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/nosotros" element={<AboutUs />} />
-      </Routes>
-      <Footer
-        section={footerSections}
-        description={"Todos los derechos Reservados. TiedaMuebles"}
-      />
-            </div>
-
-    </Router>
+          <Route element={<Layout />}>
+            <Route element={<ProtectectRout />}>
+              <Route path="/home" element={<Home />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvaider>
   );
 }
 

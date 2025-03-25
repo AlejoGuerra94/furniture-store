@@ -15,10 +15,11 @@ export const Button = ({
     children,
     onClick,
     type="button",
-    disabled=false
+    disabled=false,
+    variant="primary"
 
 }:IButton) => {
-    const classProps = `${styles.button} ${className}`
+    const classProps = `${styles.button} ${styles[variant]} ${className}`
   return (
     <button
     type={type === 'submit' ? 'submit' : 'button' }

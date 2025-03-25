@@ -1,3 +1,4 @@
+import { footerSections } from "./constants";
 import styles from "./Footer.module.scss";
 
 interface ILink {
@@ -13,16 +14,15 @@ export interface IFooterSection {
 }
 
 interface IFooter {
-  section: IFooterSection[];
   description?: string;
   className?: string;
 }
 
-const Footer = ({ section, description, className }: IFooter) => {
+const Footer = ({ description, className }: IFooter) => {
   return (
     <footer className={styles.container}>
       <div className={styles.content}>
-        {section.map((section, index) => (
+        {footerSections.map((section, index) => (
           <div key={index} className={`${styles.section} ${className}`}>
             <h3>{section.title}</h3>
             <nav className={`${styles.nav}`}>
