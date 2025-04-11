@@ -1,26 +1,30 @@
-// App.tsx
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthProvaider } from "./auth/AuthProvaider";
 import Layout from "./components/Layout";
-import ProtectectRout from "./routes/ProtectedRoute";
-import Login from "./pages/Login";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import Store from "./pages/Store";
+import { AuthProvider } from "./auth/AuthProvider";
 
 function App() {
   return (
-    <AuthProvaider>
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-
           <Route element={<Layout />}>
-            <Route element={<ProtectectRout />}>
-              <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/nosotros" element={<AboutUs />} />
+            <Route path="/registro" element={<SignUp />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/tienda" element={<Store />} />
             </Route>
           </Route>
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
-    </AuthProvaider>
+    </AuthProvider>
   );
 }
 

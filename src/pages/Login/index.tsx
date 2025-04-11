@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import { Button } from "../../components";
 import { Input } from "../../components/Input";
-import { Menu } from "../../components/NavBar/Menu";
 
 import styles from "./Login.module.scss";
+import { useAuth } from "../../auth/AuthProvider";
 
 interface ILogin {
   email: string;
@@ -16,14 +16,32 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, touchedFields },
+    formState: { errors, isValid, isSubmitting, touchedFields },
+    setError,
   } = useForm<ILogin>({ mode: "onTouched" });
+
+  const auth = useAuth();
+
+  const onSubmit = async (data: ILogin) => {
+    try {
+      await auth.login(data.email, data.password);
+    } catch (error) {
+      setError("root", {
+        type: "manual",
+        message: "Credenciales incorrectas. Por favor, inténtalo de nuevo.",
+      });
+    }
+  };
+
+  if (auth.isAuthenticated) {
+    return <Navigate to="/tienda" replace />;
+  }
 
   const inputs = [
     {
       name: "email",
       label: "Email",
-      inputType: "text",
+      inputType: "email",
       isTouched: touchedFields.email,
       register,
       rules: {
@@ -50,31 +68,38 @@ const Login = () => {
       },
     },
   ];
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <Menu />
         <div className={styles.card}>
-         <div className={styles.heading}>
-          <h3>
-            Ingresa al portal cliente
-          </h3>
-        </div>
+          <div className={styles.heading}>
+            <p>Ingresa al portal cliente</p>
+          </div>
 
-        <form action="" className={styles.form}>
-            {inputs.map((input) =>(
-                <Input key={input.name} {...input}/>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+            {inputs.map((input) => (
+              <Input key={input.name} {...input} />
             ))}
-          <Button type="submit" >Iniciar sesión</Button>
-        </form>
-        <Link
-              to="/recuperar-contrasena"
-              style={{ textDecoration: 'none' }}
+            <Button
+              type="submit"
+              disabled={!isValid || isSubmitting}
+              className={styles.submitButton}
             >
-              <p>
+              {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
+            </Button>
+          </form>
+          <div className={styles.links}>
+            <Link to="/recuperar-contrasena" style={{ textDecoration: "none" }}>
               ¿Olvidaste tu contraseña?
-              </p>
             </Link>
+            <Link to="/registro" style={{ textDecoration: "none" }}>
+              Crear cuenta
+            </Link>
+            <Link to="/" style={{ textDecoration: "none", color: "#037bc0" }}>
+              Regresar a la tienda
+            </Link>
+          </div>
         </div>
       </div>
     </div>
