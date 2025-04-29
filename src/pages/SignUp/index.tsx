@@ -1,13 +1,14 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../components";
 import { Input } from "../../components/Input";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthProvider";
 
 import styles from "./SignUp.module.scss";
-import { useAuth } from "../../auth/AuthProvider";
-import { Navigate } from "react-router-dom";
 
 interface ISignUp {
-  user: string;
+  userName: string;
   email: string;
   password: string;
 }
@@ -17,26 +18,40 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setError,
   } = useForm<ISignUp>({ mode: "onTouched" });
+
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const auth = useAuth();
 
   const inputs = [
     {
-      name: "user",
+      name: "userName",
       label: "Usuario",
       inputType: "text",
-      error: errors.user?.message || "",
+      error: errors.userName?.message || "",
       rules: {
         required: "*Ingrese un usuario",
+        minLength: {
+          value: 3,
+          message: "*Mínimo 3 caracteres",
+        },
+        maxLength: {
+          value: 20,
+          message: "*Máximo 20 caracteres",
+        },
         pattern: {
-          value: /^[a-zA-Z0-9]{3,20}$/,
-          message: "*Ingrese un usuario válido",
+          value: /^[a-zA-Z0-9_]+$/,
+          message: "*Solo letras, números y guiones bajos",
         },
       },
     },
     {
       name: "email",
       label: "Email",
-      inputType: "text",
+      inputType: "email",
       error: errors.email?.message || "",
       rules: {
         required: "*Ingrese un email",
@@ -52,21 +67,54 @@ const SignUp = () => {
       inputType: "password",
       error: errors.password?.message || "",
       rules: {
-        required: "*Ingrese una contraseña.",
+        required: "*Ingrese una contraseña",
+        minLength: {
+          value: 6,
+          message: "*Mínimo 6 caracteres",
+        },
         pattern: {
-          value: /^((?=.*[\W]))(?=.*[\d])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-          message: "*La contraseña ingresada es incorrecta.",
+          value: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
+          message: "*Debe contener letras y al menos un número",
         },
       },
     },
   ];
 
-  const onSubmit = (data: any) => {
-    console.log("Datos del formulario:", data);
+  const onSubmit = async (data: ISignUp) => {
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+    try {
+      await auth.signUp(data.userName, data.email, data.password);
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Error en el registro";
+      setSubmitError(errorMessage);
+
+      if (typeof errorMessage === "string") {
+        if (errorMessage.toLowerCase().includes("email")) {
+          setError("email", {
+            type: "manual",
+            message: "Este email ya está registrado",
+          });
+        }
+        if (errorMessage.toLowerCase().includes("usuario")) {
+          setError("userName", {
+            type: "manual",
+            message: "Nombre de usuario no disponible",
+          });
+        }
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const auth = useAuth();
-  if (auth.isAutehnticated) {
+  if (auth.isAuthenticated) {
     return <Navigate to="/" replace />;
   }
 
@@ -77,11 +125,22 @@ const SignUp = () => {
           <div className={styles.heading}>
             <h3>Crea una cuenta del portal</h3>
           </div>
+
+          {submitError && (
+            <div className={styles.errorMessage}>{submitError}</div>
+          )}
+
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             {inputs.map((input) => (
               <Input key={input.name} {...input} register={register} />
             ))}
-            <Button disabled={!isValid} type="submit">Crear cuenta</Button>
+            <Button
+              type="submit"
+              disabled={!isValid || isSubmitting}
+              className={styles.submitButton}
+            >
+              {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
+            </Button>
           </form>
         </div>
       </div>

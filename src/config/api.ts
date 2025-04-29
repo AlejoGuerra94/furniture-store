@@ -1,6 +1,8 @@
+
+// En tu archivo de configuración
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api',
+  BASE_URL: 'http://localhost:3100',
   ENDPOINTS: {
-    LOGIN: '/auth/login',
+    SIGNUP: '/api/signup'
   }
 };
